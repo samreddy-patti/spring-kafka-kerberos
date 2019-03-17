@@ -1,0 +1,27 @@
+spring:
+  kafka:
+    bootstrap-servers: localhost:9092,localhost:9093
+    producer:
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    jaas:
+      enabled: true
+    properties:
+      security:
+        protocol: SASL_PLAINTEXT
+      sasl:
+        mechanism: GSSAPI
+        kerberos:
+          service:
+            name: kafka
+        jaas:
+          config: com.sun.security.auth.module.Krb5LoginModule required useTicketCache=true renewTicket=true  serviceName="kafka"  principal="svc-kafka@SAM.ORG" useKeyTab=true keyTab="/etc/kbr5/svc-kafka.keytab";
+
+price:
+  kafka:
+    producer:
+      topic: DATA.PRICE
+
+logging:
+  level:
+    root: INFO
+    org.springframework.web: INFO
